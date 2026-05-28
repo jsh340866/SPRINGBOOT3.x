@@ -12,7 +12,7 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
 //        System.out.println("GET /");
-        log.info("GET /");
+        log.info("GET /....2232");
         return "index";
     }
 }

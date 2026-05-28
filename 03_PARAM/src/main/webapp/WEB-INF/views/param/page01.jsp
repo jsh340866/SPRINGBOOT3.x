@@ -6,9 +6,9 @@
 </head>
 <body>
 <h1>
-    Hello world!
+    /param/p01 PAGE
 </h1>
 
-<P>  The time on the server is 하이!! </P>
+<P> --- </P>
 </body>
 </html>
