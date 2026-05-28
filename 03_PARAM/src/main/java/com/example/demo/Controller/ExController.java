@@ -2,9 +2,8 @@ package com.example.demo.Controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * ============================================================
@@ -32,8 +31,10 @@ public class ExController {
      * - 출력 : EX01 keyword : spring
      */
     @GetMapping("/ex01")
-    public void ex01(/* TODO: keyword 파라미터 받기 */){
+    public void ex01(/* TODO: keyword 파라미터 받기 */String keyword){
         // TODO: log.info("EX01 keyword : " + keyword);
+        log.info("EX01 keyword :" + keyword);
+//        return ex/ex01page;
     }
 
 
