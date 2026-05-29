@@ -7,14 +7,48 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @Slf4j
 @RequestMapping("/memo")
 public class MemoController {
+
+    @InitBinder
+    public void dataBinder(WebDataBinder webDataBinder) {
+        log.info("MemoController's dataBinder...." + webDataBinder);
+        webDataBinder.registerCustomEditor(LocalDate.class, "customData",new CustomDataEditor());
+    }
+
+    //customData 파라미터 바인더용
+    private static class CustomDataEditor extends PropertyEditorSupport {
+
+        @Override
+        public void setAsText(String text) throws IllegalArgumentException {
+            log.info("CustomDataEditor's setAsText : " + text);
+            //yyyy~MM~dd -> yyyy-MM-dd
+
+            LocalDate date = null;
+            if(text.isEmpty()) {
+                // 1) 만약 비어서 전달된다면 현재시간을 시준으로 바인딩
+                date = LocalDate.now();
+            } else {
+                // 2) yyyy~MM~dd -> yyyy-MM-dd 포매팅 변환 후 바인딩
+                text = text.replaceAll("~","-");
+                date = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
+            setValue(date);
+
+        }
+    }
 
     @GetMapping("/add")
     public void memoAdd(){

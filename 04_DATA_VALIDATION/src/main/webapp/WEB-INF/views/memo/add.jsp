@@ -31,6 +31,10 @@
             <input type="datetime-local" name="createAt"/>
         </div>
         <div>
+            <label>CUSTOM DATABINDER</label>
+            <input type="text" name="customData" placeHolder="yyyy~MM~dd 로 입력하세요."/>&nbsp;&nbsp;<span style="font-size:.8rem;" >${customData}</span>
+        </div>
+        <div>
             <input type="submit" value="저장"/>
         </div>
     </form>
